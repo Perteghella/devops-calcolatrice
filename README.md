@@ -1,7 +1,8 @@
 # README
 
 Questo codice contiene una semplice calcolatrice che esegue l'operazione di:
--  somma tra due numeri
+- somma tra due numeri
+- sottrazione tra due numeri
 
 Include anche test unitari per verificare il corretto funzionamento della funzione di somma.
 
@@ -38,6 +39,11 @@ python3 calcolatrice.py
 pytest test_calcolatrice.py
 
 
-## Github
+## Github upload
 
-- git init
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Perteghella/devops-calcolatrice.git
+git push -u origin main
