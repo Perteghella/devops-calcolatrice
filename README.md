@@ -6,9 +6,11 @@ Questo codice contiene una semplice calcolatrice che esegue l'operazione di:
 
 Include anche test unitari per verificare il corretto funzionamento della funzione di somma.
 
+Sono presenti anche i file per la creazione di un'immagine Docker, e le pipeline GitHub Actions per il build e il push dell'immagine su Docker Hub.
+
 ## Requisiti
 
-- Aver installato UV da https://github.com/astral-sh/uv
+- Installare `UV` da https://github.com/astral-sh/uv
 
 - Creare un ambiente virtuale
     - python3 -m venv .venv
@@ -32,18 +34,45 @@ Include anche test unitari per verificare il corretto funzionamento della funzio
 
 ## Esecuzione normale
 
+```shell
 python3 calcolatrice.py
+```
 
 ## Esecuzione dei test
 
+```shell
 pytest -v
-
+```
 
 ## Github upload
 
-- git init
-- git add .
-- git commit -m "first commit"
-- git branch -M main
-- git remote add origin https://github.com/Perteghella/devops-calcolatrice.git
-- git push -u origin main
+```shell
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/XXX/devops-calcolatrice.git
+git push -u origin main
+```
+
+## Docker build
+
+```shell
+docker build -f Dockerfile -t devops-calcolatrice:local .
+docker run --rm -it devops-calcolatrice:local
+```
+
+## Docker Hub upload
+
+### Crea un repository su Docker Hub
+
+Esempio: docker.io/<DOCKERHUB_USERNAME>/devops-calcolatrice
+
+### Aggiungi i secret su GitHub
+
+Nel repo GitHub → Settings → Secrets and variables → Actions → New repository secret
+
+- DOCKERHUB_USERNAME
+- DOCKERHUB_TOKEN
+
+👉 token generato da Docker Hub (Account Settings → Security → New Access Token)
