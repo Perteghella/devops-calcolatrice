@@ -68,6 +68,20 @@ docker run --rm -it devops-calcolatrice:local
 
 Esempio: docker.io/<DOCKERHUB_USERNAME>/devops-calcolatrice
 
+### Fare build immagine 
+
+`perteghella` è il mio username su Docker Hub = <DOCKERHUB_USERNAME>
+
+```shell
+docker build -f Dockerfile -t  perteghella/devops-calcolatrice:manuale .
+``` 
+
+### Fare il push dell'immagine
+
+```shell
+docker push perteghella/devops-calcolatrice:manuale
+```
+
 ### Aggiungi i secret su GitHub
 
 Nel repo GitHub → Settings → Secrets and variables → Actions → New repository secret
@@ -75,4 +89,4 @@ Nel repo GitHub → Settings → Secrets and variables → Actions → New repos
 - DOCKERHUB_USERNAME
 - DOCKERHUB_TOKEN
 
-👉 token generato da Docker Hub (Account Settings → Security → New Access Token)
+👉 token generato da Docker Hub (Account Settings →  Access Token)
