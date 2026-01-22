@@ -1,12 +1,13 @@
-name: docker-build
+name: docker-build-and-push
 
 on:
   workflow_run:
-    workflows: ["pytest"]     # deve combaciare col name: del workflow pytest
-    types: [completed]
+    workflows: ["pytest"]   # deve combaciare col name: del workflow test
+    types:
+      - completed
 
 jobs:
-  build:
+  docker:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
@@ -17,10 +18,18 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build Docker image (no push)
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Dockerfile
-          push: false
-          tags: devops-calcolatrice:${{ github.sha }}
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/devops-calcolatrice:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/devops-calcolatrice:${{ github.sha }}
